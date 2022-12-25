@@ -1,9 +1,12 @@
 /*
 * AUTHOR: ASHWIN ABRAHAM
 */
-//note: These algorithms have been made only for integer arrays
+// note: These algorithms have been made only for integer arrays
 
 #include <cstdlib>
+#include <mutex>
+#include <thread>
+#include <vector>
 #include "sort.hpp"
 
 void sort::swap(int &a, int &b)
@@ -147,6 +150,71 @@ void sort::quicksort(int arr[], int end, int begin /*= 0*/)
     sort::swap(arr[begin + num_less], arr[pivot]);
     sort::quicksort(arr, begin + num_less, begin);
     sort::quicksort(arr, end, begin + num_less + 1);
+}
+
+void sort::sleepsort(int arr[], int end, int begin /*= 0*/)
+{
+    if(end - begin <= 1) return;
+    std::mutex locker;
+    auto sleeper_func = [](int val, int *num_sorted, int min, int *ptr){ sleep(val - min + 1); locker.lock(); ptr[*num_sorted] = val; ++(*num_sorted); locker.unlock(); };
+    int min = arr[begin];
+    for(int i = begin + 1; i < end; ++i)
+    {
+        if(arr[i] < min) min = arr[i];
+    }
+
+    int num_sorted = begin;
+    std::vector<std::thread> threads(end - begin - 1);
+    for(int i = begin; i < end - 1; ++i)
+    {
+        threads[i - begin] = std::thread(sleeper_func, arr[i], &num_sorted, min, arr);
+    }
+    sleeper_func(arr[i], &num_sorted, min, arr);
+    for(int i = begin; i < end - 1; ++i) threads[i - begin].join();
+}
+
+void sort::mergesort(int arr[], int end, int begin /*= 0*/)
+{
+    if ((end - begin) <= 1)
+        return;
+    std::thread t(sort::mergesort, arr, (begin + end) / 2, begin);
+    sort::mergesort(arr, end, (begin + end) / 2);
+    t.join();
+    int kl = begin, kr = (begin + end) / 2;
+    int sortedarr[end - begin];
+    for (int i = 0; i < (end - begin); ++i)
+    {
+        if (kl < (begin + end) / 2)
+        {
+            if (kr < end)
+            {
+                if (arr[kl] < arr[kr])
+                {
+                    sortedarr[i] = arr[kl];
+                    ++kl;
+                }
+                else
+                {
+                    sortedarr[i] = arr[kr];
+                    ++kr;
+                }
+            }
+            else
+            {
+                sortedarr[i] = arr[kl];
+                ++kl;
+            }
+        }
+        else if (kr < end)
+        {
+            sortedarr[i] = arr[kr];
+            ++kr;
+        }
+        else
+            break;
+    }
+    for (int i = begin; i < end; ++i)
+        arr[i] = sortedarr[i - begin];
 }
 
 bool sort::binarysearch(int arr[], int search, int end, int begin /*= 0*/)

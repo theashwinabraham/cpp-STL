@@ -17,6 +17,8 @@ namespace sort
     void countingsort(int *, int, int = 0);
     void mergesort(int *, int, int = 0);
     void quicksort(int *, int, int = 0);
+    void sleepsort(int *, int, int = 0);
+    void threadsort(int *, int, int = 0);
 
     //returns whether or not an integer is present in the array
     bool binarysearch(int *, int, int, int = 0);
