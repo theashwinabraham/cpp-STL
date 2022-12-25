@@ -173,7 +173,7 @@ void sort::sleepsort(int arr[], int end, int begin /*= 0*/)
     for(int i = begin; i < end - 1; ++i) threads[i - begin].join();
 }
 
-void sort::mergesort(int arr[], int end, int begin /*= 0*/)
+void sort::threadsort(int arr[], int end, int begin /*= 0*/)
 {
     if ((end - begin) <= 1)
         return;
