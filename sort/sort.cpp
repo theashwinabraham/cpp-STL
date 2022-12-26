@@ -7,6 +7,7 @@
 #include <mutex>
 #include <thread>
 #include <vector>
+#include <unistd.h>
 #include "sort.hpp"
 
 void sort::swap(int &a, int &b)
@@ -78,7 +79,7 @@ void sort::countingsort(int arr[], int end, int begin /*= 0*/)
         if (arr[i] < min)
             min = arr[i];
     }
-    int book[max - min + 1] = {};
+    int *book = new int[max - min + 1]();
     for (int i = begin; i < end; ++i)
         ++book[arr[i] - min];
     for (int i = min, k = begin; i <= max; ++i, k += book[i - min])
@@ -86,6 +87,7 @@ void sort::countingsort(int arr[], int end, int begin /*= 0*/)
         for (int j = 0; j < book[i - min]; ++j)
             arr[j + k] = i;
     }
+    delete [] book;
 }
 
 void sort::mergesort(int arr[], int end, int begin /*= 0*/)
@@ -95,7 +97,7 @@ void sort::mergesort(int arr[], int end, int begin /*= 0*/)
     sort::mergesort(arr, (begin + end) / 2, begin);
     sort::mergesort(arr, end, (begin + end) / 2);
     int kl = begin, kr = (begin + end) / 2;
-    int sortedarr[end - begin];
+    int *sortedarr = new int[end - begin]();
     for (int i = 0; i < (end - begin); ++i)
     {
         if (kl < (begin + end) / 2)
@@ -129,6 +131,7 @@ void sort::mergesort(int arr[], int end, int begin /*= 0*/)
     }
     for (int i = begin; i < end; ++i)
         arr[i] = sortedarr[i - begin];
+    delete [] sortedarr;
 }
 
 void sort::quicksort(int arr[], int end, int begin /*= 0*/)
@@ -155,7 +158,7 @@ void sort::sleepsort(int arr[], int end, int begin /*= 0*/)
 {
     if(end - begin <= 1) return;
     std::mutex locker;
-    auto sleeper_func = [](int val, int *num_sorted, int min, int *ptr){ sleep(val - min + 1); locker.lock(); ptr[*num_sorted] = val; ++(*num_sorted); locker.unlock(); };
+    auto sleeper_func = [&locker](int val, int *num_sorted, int min, int *ptr){ sleep(val - min + 1); locker.lock(); ptr[*num_sorted] = val; ++(*num_sorted); locker.unlock(); };
     int min = arr[begin];
     for(int i = begin + 1; i < end; ++i)
     {
@@ -168,7 +171,7 @@ void sort::sleepsort(int arr[], int end, int begin /*= 0*/)
     {
         threads[i - begin] = std::thread(sleeper_func, arr[i], &num_sorted, min, arr);
     }
-    sleeper_func(arr[i], &num_sorted, min, arr);
+    sleeper_func(arr[end - 1], &num_sorted, min, arr);
     for(int i = begin; i < end - 1; ++i) threads[i - begin].join();
 }
 
@@ -180,7 +183,7 @@ void sort::threadsort(int arr[], int end, int begin /*= 0*/)
     sort::mergesort(arr, end, (begin + end) / 2);
     t.join();
     int kl = begin, kr = (begin + end) / 2;
-    int sortedarr[end - begin];
+    int *sortedarr = new int[end - begin]();
     for (int i = 0; i < (end - begin); ++i)
     {
         if (kl < (begin + end) / 2)
@@ -214,6 +217,7 @@ void sort::threadsort(int arr[], int end, int begin /*= 0*/)
     }
     for (int i = begin; i < end; ++i)
         arr[i] = sortedarr[i - begin];
+    delete [] sortedarr;
 }
 
 void sort::thread_quicksort(int arr[], int end, int begin /*= 0*/)
@@ -231,7 +235,7 @@ void sort::thread_quicksort(int arr[], int end, int begin /*= 0*/)
         }
     }
     sort::swap(arr[begin + num_less], arr[pivot]);
-    std::thread t(sort::quicksort(arr, begin + num_less, begin));
+    std::thread t(sort::quicksort, arr, begin + num_less, begin);
     sort::quicksort(arr, end, begin + num_less + 1);
     t.join();
 }
