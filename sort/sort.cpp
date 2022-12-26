@@ -18,36 +18,35 @@ void sort::swap(int &a, int &b)
 
 void sort::bubblesort(int arr[], int end, int begin /*= 0*/)
 {
-    if ((end - begin) <= 1)
-        return;
-    bool sorted = true;
-    for (int i = begin; i < end - 1; ++i)
+    for(int right = end; right > begin + 1; --right)
     {
-        if (arr[i] > arr[i + 1])
+        bool sorted = true;
+        for (int i = begin; i < right - 1; ++i)
         {
-            sorted = false;
-            sort::swap(arr[i], arr[i + 1]);
+            if (arr[i] > arr[i + 1])
+            {
+                sorted = false;
+                sort::swap(arr[i], arr[i + 1]);
+            }
         }
+        if (sorted) break;
     }
-    if (sorted)
-        return;
-    sort::bubblesort(arr, end - 1, begin);
 }
 
 void sort::selectionsort(int arr[], int end, int begin /*= 0*/)
 {
-    if ((end - begin) <= 1)
-        return;
-    int maxind = begin;
-    for (int i = 1 + begin; i < end; ++i)
+    for(int right = end; right > begin + 1; --right)
     {
-        if (arr[i] > arr[maxind])
+        int maxind = begin;
+        for (int i = 1 + begin; i < right; ++i)
         {
-            maxind = i;
+            if (arr[i] > arr[maxind])
+            {
+                maxind = i;
+            }
         }
+        sort::swap(arr[maxind], arr[right - 1]);
     }
-    sort::swap(arr[maxind], arr[end - 1]);
-    sort::selectionsort(arr, end - 1);
 }
 
 void sort::insertionsort(int arr[], int end, int begin /*= 0*/)
@@ -215,6 +214,26 @@ void sort::threadsort(int arr[], int end, int begin /*= 0*/)
     }
     for (int i = begin; i < end; ++i)
         arr[i] = sortedarr[i - begin];
+}
+
+void sort::thread_quicksort(int arr[], int end, int begin /*= 0*/)
+{
+    if(end - begin <= 1) return;
+    int pivot = begin + rand() % (end - begin), num_less = 0;
+    for (int i = begin; i < end; ++i)
+    {
+        if (arr[i] < arr[pivot])
+        {
+            sort::swap(arr[i], arr[begin + num_less]);
+            if (begin + num_less == pivot)
+                pivot = i;
+            ++num_less;
+        }
+    }
+    sort::swap(arr[begin + num_less], arr[pivot]);
+    std::thread t(sort::quicksort(arr, begin + num_less, begin));
+    sort::quicksort(arr, end, begin + num_less + 1);
+    t.join();
 }
 
 bool sort::binarysearch(int arr[], int search, int end, int begin /*= 0*/)
