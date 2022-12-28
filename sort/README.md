@@ -34,17 +34,18 @@ If you have only built the library and not installed it, you must also add ```-I
 | Algorithm/Size                 | 1            |        10   |         100 |       1,000 |        10,000 |      100,000 |       1,000,000 |        10,000,000 |      100,000,000 |     1,000,000,000  |
 |--------------------------------|--------------|-------------|-------------|-------------|---------------|--------------|-----------------|-------------------|------------------|--------------------|
 | ```sort::linearsearch```       | $0.434 \mu s$|$0.558 \mu s$|$0.537 \mu s$| $0.75 \mu s$| $5.45 \mu s$  |$25.36 \mu s$ |$460.5 \mu s$    |  $3.71 ms$        | $35.85 ms$       | $375.66 ms$        |
+| ```sort::threadsearch```       | $595 \mu s$  |$803 \mu s$  |$1.19 ms$    | $1.18 ms$   | $890.54 \mu s$|$1.064 ms$    |$920.29 \mu s$   |  $1.24 ms$        | $1.28 ms$        | $1.11 ms$          |
 | ```sort::binarysearch```       |$0.537 \mu s$ |$0.712 \mu s$|$0.561 \mu s$|$0.647 \mu s$| $0.66 \mu s$  |$0.727 \mu s$ |$1.05 \mu s$     | $1.46 \mu s$      | $1.48 \mu s$     | $1.75 \mu s$       |
 | ```sort::upperlim```           | $0.559 \mu s$|$0.592 \mu s$|$0.566 \mu s$|$0.654 \mu s$|$0.645 \mu s$  |$0.831 \mu s$ |$1.45 \mu s$     | $3.56 \mu s$      | $5.27 \mu s$     | $10.92 \mu s$      |
 | ```sort::lowerlim```           |$0.434 \mu s$ |$0.516 \mu s$|$0.55 \mu s$ |$0.528 \mu s$|$0.683 \mu s$  |$0.942 \mu s$ |$1.228 \mu s$    |$3.23 \mu s$       | $5.34 \mu s$     | $7.45 \mu s$       |
-| ```sort::quicksort```          |$0.35 \mu s$  |$0.814 \mu s$|$4.57 \mu s$ |$63.77 \mu s$|$543.94 \mu s$ |$6.16 ms$     |$148.58 ms$      |$10.22 s$          |$17 m 57.25s$     | $> 1hr$            |
-| ```sort::mergesort```          |$0.39 \mu s$  |$2.86 \mu s$ |$7.55 \mu s$ |$63.45 \mu s$|$741.02 \mu s$ |$7.17 ms$     |$85.96 ms$       |$831.93 ms$        |$9.79 s$          |$2m 8.5s$           |
 | ```sort::heapsort```           |$0.552 \mu s$ |$1.1 \mu s$  |$5.27 \mu s$ |$64.23 \mu s$|$840.4 \mu s$  |$9.59 ms$     |$135.9 ms$       |$2.1 s$            |$27.3 s$          |$4m 52.17s$         |
+| ```sort::mergesort```          |$0.39 \mu s$  |$2.86 \mu s$ |$7.55 \mu s$ |$63.45 \mu s$|$741.02 \mu s$ |$7.17 ms$     |$85.96 ms$       |$831.93 ms$        |$9.79 s$          |$2m 8.5s$           |
+| ```sort::quicksort```          |$0.35 \mu s$  |$0.814 \mu s$|$4.57 \mu s$ |$63.77 \mu s$|$543.94 \mu s$ |$6.16 ms$     |$148.58 ms$      |$10.22 s$          |$17 m 57.25s$     | $> 1hr$            |
+| ```sort::threadsort```         |$0.348 \mu s$ |$983.1 \mu s$|$1.36 ms$    |$1.41 ms$    |$2.78 ms$      |$8.57 ms$     |$42.52 ms$       |$352.72 ms$        |$3.57 s$          |$48.87 s$           |
+| ```sort::thread_quicksort```   |$0.492 \mu s$ |$720.23 \mu s$|$1.09 ms$   |$2.57 ms$    |$2.48 ms$      |$8.27 ms$     |$47.62 ms$       |$330.72 ms$        |$3.31 s$          |$55.47 s$           |
 | ```sort::countingsort```       |$0.791 \mu s$ |$1.24 ms$    |$1.79 ms$    |$1.586 ms$   |$1.83 ms$      |$3.42 ms$     |$17.70 ms$       |$44.78 ms$         |$322.13 ms$       |$3.33 s$            |
 | ```sort::fast_insertionsort``` |$0.771 \mu s$ |$1.87 \mu s$ |$4.64 \mu s$ |$61.48 \mu s$|$1.72 ms$      |$190.53 ms$   |$26.86 s$        |$> 1hr$            |$> 1hr$           |$> 1hr$             |
 | ```sort::insertionsort```      |$0.728 \mu s$ |$2.48 \mu s$ |$5.44 \mu s$ |$228.8 \mu s$|$14.49 ms$     |$1.54 s$      |$3m 33.56s$      |$> 1hr$            |$> 1hr$           |$> 1hr$             |
 | ```sort::selectionsort```      |$0.843 \mu s$ |$1.13 \mu s$ |$7.48 \mu s$ |$419.5 \mu s$|$38.62 ms$     |$4.12 s$      |$10m 30.88s$     |$> 1hr$            |$> 1hr$           |$> 1hr$             |
 | ```sort::bubblesort```         |$0.745 \mu s$ |$1.2 \mu s$  |$16.4 \mu s$ |$900.2 \mu s$|$84.86 ms$     |$19.68 s$     |$53m 34.36s$     |$> 1hr$            |$> 1hr$           |$> 1hr$             |
-| ```sort::threadsort```         |$0.57 \mu s$  |$234.2 \mu s$|$245.6 \mu s$|$352.4 \mu s$|$670.47 \mu s$ |$4.57 ms$     |$55.61 ms$       |$610.74 ms$        |$6.26 s$          |$86.54 s$           |
-| ```sort::thread_quicksort```   |$1.03 \mu s$  |$237.2 \mu s$|$235.2 \mu s$|$280.6 \mu s$|$739.6 \mu s$  |$8.62 ms$     |$78.23 ms$       |$845.26 ms$        |$12.73 s$         |$5m 50.63s$         |
 | ```sort::sleepsort```          |$0.55 \mu s$  |$2m 43s$     |$2m 54s$     |$3m$         |$3m 0.4s$      |Out of Memory |Out of Memory    |Out of Memory      |Out of Memory     |Out of Memory       |
