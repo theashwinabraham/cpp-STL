@@ -11,7 +11,7 @@ int main(int argc, char ** argv)
     int *arr = new int[SIZE];
     for(int i = 0; i < SIZE; ++i) arr[i] = rand() % RANGE;
     auto t1 = std::chrono::high_resolution_clock::now();
-    sort::insertionsort(arr, SIZE);
+    sort::selectionsort(arr, SIZE);
     auto t2 = std::chrono::high_resolution_clock::now();
     std::cout << std::chrono::duration<double, std::milli>(t2 - t1).count() << '\n';
     delete [] arr;
