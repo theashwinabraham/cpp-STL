@@ -37,7 +37,7 @@ If you have only built the library and not installed it, you must also add ```-I
 | ```sort::binarysearch```       |$0.537 \mu s$ |$0.712 \mu s$|$0.561 \mu s$|$0.647 \mu s$| $0.66 \mu s$  |$0.727 \mu s$ |$1.05 \mu s$     | $1.46 \mu s$      | $1.48 \mu s$     | $1.75 \mu s$       |
 | ```sort::upperlim```           | $0.559 \mu s$|$0.592 \mu s$|$0.566 \mu s$|$0.654 \mu s$|$0.645 \mu s$  |$0.831 \mu s$ |$1.45 \mu s$     | $3.56 \mu s$      | $5.27 \mu s$     | $10.92 \mu s$      |
 | ```sort::lowerlim```           |$0.434 \mu s$ |$0.516 \mu s$|$0.55 \mu s$ |$0.528 \mu s$|$0.683 \mu s$  |$0.942 \mu s$ |$1.228 \mu s$    |$3.23 \mu s$       | $5.34 \mu s$     | $7.45 \mu s$       |
-| ```sort::quicksort```          |$0.35 \mu s$  |$0.814 \mu s$|$4.57 \mu s$ |$63.77 \mu s$|$543.94 \mu s$ |$6.16 ms$     |$148.58 ms$      |$10.22 s$          |$17 m 57.25s$     | $ > 1hr$           |
+| ```sort::quicksort```          |$0.35 \mu s$  |$0.814 \mu s$|$4.57 \mu s$ |$63.77 \mu s$|$543.94 \mu s$ |$6.16 ms$     |$148.58 ms$      |$10.22 s$          |$17 m 57.25s$     | $> 1hr$           |
 | ```sort::mergesort```          |$0.39 \mu s$  |$2.86 \mu s$ |$7.55 \mu s$ |$63.45 \mu s$|$741.02 \mu s$ |$7.17 ms$     |$85.96 ms$       |$831.93 ms$        |$9.79 s$          |$2m 8.5s$           |
 | ```sort::heapsort```           |$0.552 \mu s$ |$1.1 \mu s$  |$5.27 \mu s$ |$64.23 \mu s$|$840.4 \mu s$  |$9.59 ms$     |$135.9 ms$       |$2.1 s$            |$27.3 s$          |$4m 52.17s$         |
 | ```sort::countingsort```       |$0.791 \mu s$ |$1.24 ms$    |$1.79 ms$    |$1.586 ms$   |$1.83 ms$      |$3.42 ms$     |$17.70 ms$       |$44.78 ms$         |$322.13 ms$       |$3.33 s$            |
